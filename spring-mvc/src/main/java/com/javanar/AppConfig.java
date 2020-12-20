@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.javanar.model.Person;
 
 @Configuration
-@ComponentScan({"com.javanar.controller", "com.javanar.service", "com.javanar.dao"})
+@ComponentScan({"com.javanar.*"})
 public class AppConfig {
 
 	@Bean
@@ -31,5 +31,5 @@ public class AppConfig {
 		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		return sessionFactory;
 	}
-	
+
 }
