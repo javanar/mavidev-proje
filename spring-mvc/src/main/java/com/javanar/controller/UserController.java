@@ -2,31 +2,54 @@ package com.javanar.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.javanar.model.Person;
 import com.javanar.service.UserService;
 
 @Controller
+@Validated
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/add")
-	public ModelAndView add(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) {
-		
-		this.userService.add(firstName, lastName);
-		
-		String result = firstName + " " + lastName;
+	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
+	public ModelAndView addUser(Model model) {
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("result");
-		mv.addObject("result",result);
+		mv.setViewName("addUser");
+		model.addAttribute("form",new PersonForm());
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/add", method = RequestMethod.POST)
+	public ModelAndView add(@ModelAttribute("form") @Valid PersonForm personForm,  BindingResult errors, Model model) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("Errors : " + errors.getErrorCount());
+		System.out.println(personForm.getFirstName());
+		System.out.println(personForm.getLastName());
+		
+		if(errors.hasErrors()) {
+			mv.setViewName("addUser");
+		} else {
+			this.userService.add(personForm.getFirstName(), personForm.getLastName());
+			mv.setViewName("result");
+			mv.addObject("result",personForm.getFirstName() + " " + personForm.getLastName());
+		}
 		
 		return mv;
 	}
