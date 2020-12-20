@@ -15,6 +15,6 @@
     	<br>
 	</c:forEach>
 	<br>
-	Click <a href="add">here</a> to add another person...
+	Click <a href="index.jsp">here</a> to add another person...
 </body>
 </html>
