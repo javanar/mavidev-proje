@@ -14,5 +14,7 @@
     	${person.firstName} ${person.lastName}
     	<br>
 	</c:forEach>
+	<br>
+	Click <a href="add">here</a> to add another person...
 </body>
 </html>

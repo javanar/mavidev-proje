@@ -17,7 +17,7 @@
 		<input type="submit">
 	</form>
 	
-	Click <a href="list">here</a> to list all people...
+	Click <a href="list">here</a> to list all people inserted before...
 
 </body>
 </html>

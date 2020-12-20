@@ -11,5 +11,8 @@
  <p>
  	Person : ${result} is added to the database
  </p>
+ Click <a href="list">here</a> to list all people inserted before...
+ <br>
+ Click <a href="add">here</a> to add another person...
 </body>
 </html>
